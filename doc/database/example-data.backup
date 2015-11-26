@@ -1,0 +1,285 @@
+-- TOC entry 2064 (class 0 OID 66759)
+-- Dependencies: 192
+-- Data for Name: category; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO category (id, description, name, photoname) VALUES (5, 'Bebidas', 'Bebidas', NULL);
+INSERT INTO category (id, description, name, photoname) VALUES (6, 'Lanches', 'Lanches', NULL);
+INSERT INTO category (id, description, name, photoname) VALUES (7, 'Comercial', 'Comercial', NULL);
+INSERT INTO category (id, description, name, photoname) VALUES (8, 'Executivos', 'Executivos', NULL);
+INSERT INTO category (id, description, name, photoname) VALUES (9, 'Sucos Naturais', 'Sucos Naturais', NULL);
+
+
+--
+-- TOC entry 2040 (class 0 OID 57442)
+-- Dependencies: 145
+-- Data for Name: operationalarea; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO operationalarea (id, description, name) VALUES (3, 'Cozinha', 'Cozinha');
+INSERT INTO operationalarea (id, description, name) VALUES (4, 'Bar', 'Bar');
+INSERT INTO operationalarea (id, description, name) VALUES (5, 'Cafeteria', 'Cafeteria');
+INSERT INTO operationalarea (id, description, name) VALUES (6, 'Lanchonete', 'Lanchonete');
+
+
+--
+-- TOC entry 2066 (class 0 OID 67047)
+-- Dependencies: 199 2064 2040
+-- Data for Name: accompaniment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO accompaniment (id, description, isactive, name, photoname, value, videoname, categoryid, operationalareaid) VALUES (12, 'Gelo', true, 'Gelo', NULL, 0, NULL, 5, 4);
+INSERT INTO accompaniment (id, description, isactive, name, photoname, value, videoname, categoryid, operationalareaid) VALUES (13, 'Gelo e Limão', true, 'Gelo e Limão', NULL, 0, NULL, 5, 4);
+INSERT INTO accompaniment (id, description, isactive, name, photoname, value, videoname, categoryid, operationalareaid) VALUES (14, 'Limão', true, 'Limão', NULL, 0, NULL, 5, 4);
+INSERT INTO accompaniment (id, description, isactive, name, photoname, value, videoname, categoryid, operationalareaid) VALUES (15, 'Gelo e Laranja', true, 'Gelo e Laranja', NULL, 0, NULL, 5, 4);
+INSERT INTO accompaniment (id, description, isactive, name, photoname, value, videoname, categoryid, operationalareaid) VALUES (16, 'Laranja', true, 'Laranja', NULL, 0, NULL, 5, 4);
+INSERT INTO accompaniment (id, description, isactive, name, photoname, value, videoname, categoryid, operationalareaid) VALUES (17, 'Batata Frita (porção p/2 pessoas)', true, 'Batata Frita (porção p/2 pessoas)', NULL, 5.5, NULL, 6, 6);
+INSERT INTO accompaniment (id, description, isactive, name, photoname, value, videoname, categoryid, operationalareaid) VALUES (19, 'Arroz (comercial)', true, 'Arroz (comercial)', NULL, 0, NULL, 7, 3);
+INSERT INTO accompaniment (id, description, isactive, name, photoname, value, videoname, categoryid, operationalareaid) VALUES (20, 'Arroz (comercial)', true, 'Feijão (comercial)', NULL, 0, NULL, 7, 3);
+INSERT INTO accompaniment (id, description, isactive, name, photoname, value, videoname, categoryid, operationalareaid) VALUES (18, 'Batata Frita (comercial)', true, 'Batata Frita (comercial)', NULL, 0, NULL, 7, 3);
+INSERT INTO accompaniment (id, description, isactive, name, photoname, value, videoname, categoryid, operationalareaid) VALUES (21, 'Salada (comercial)', true, 'Salada (comercial)', NULL, 0, NULL, 7, 3);
+
+
+--
+-- TOC entry 2065 (class 0 OID 66882)
+-- Dependencies: 196
+-- Data for Name: advertisement; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO advertisement (id, finaldate, inicialdate, isactive, name, photoname, videoname) VALUES (11, '2014-04-21', '2014-04-14', true, 'Campanha de Páscoa', NULL, NULL);
+INSERT INTO advertisement (id, finaldate, inicialdate, isactive, name, photoname, videoname) VALUES (12, '2014-05-26', '2014-04-21', true, 'Campanha de Inverno', NULL, NULL);
+
+
+--
+-- TOC entry 2052 (class 0 OID 57783)
+-- Dependencies: 172
+-- Data for Name: alertmessagetype; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2062 (class 0 OID 66662)
+-- Dependencies: 188
+-- Data for Name: attendant; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO attendant (id, address, birthdate, email, lastname, login, name, password, photoname, registrationdate) VALUES (450, 'System Address', '2015-04-09', 'test@flygow.com', 'by System', 'test', 'Teste de atendente', 'bczGRcTIxKINVlsHJNyerg==', NULL, '2014-04-21');
+
+
+--
+-- TOC entry 2059 (class 0 OID 58112)
+-- Dependencies: 181
+-- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+INSERT INTO role (id, description, name) VALUES (200, 'Cadastro', 'Cadastro');
+
+
+--
+-- TOC entry 2063 (class 0 OID 66675)
+-- Dependencies: 190 2059 2062
+-- Data for Name: attendant_role; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+INSERT INTO attendant_role (attendant_id, role_id) VALUES (450, 200);
+INSERT INTO attendant_role (attendant_id, role_id) VALUES (450, 1);
+
+
+--
+-- TOC entry 2057 (class 0 OID 57836)
+-- Dependencies: 177
+-- Data for Name: device; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2053 (class 0 OID 57799)
+-- Dependencies: 173 2052 2057 2062
+-- Data for Name: attendantalert; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2054 (class 0 OID 57817)
+-- Dependencies: 174
+-- Data for Name: client; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2055 (class 0 OID 57825)
+-- Dependencies: 175 2059 2054
+-- Data for Name: client_role; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2056 (class 0 OID 57828)
+-- Dependencies: 176
+-- Data for Name: coin; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO coin (id, conversion, name, symbol) VALUES (4, 1, 'Real', 'R$');
+INSERT INTO coin (id, conversion, name, symbol) VALUES (6, 2.02, 'Dollar', '$');
+
+
+--
+-- TOC entry 2037 (class 0 OID 57416)
+-- Dependencies: 142 2054
+-- Data for Name: evaluationcustomer; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2067 (class 0 OID 67217)
+-- Dependencies: 202 2064 2040
+-- Data for Name: food; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO food (id, description, isactive, name, photoname, value, videoname, nutritionalinfo, categoryid, operationalareaid) VALUES (8, 'Coca-Cola (2 litros)', true, 'Coca-Cola (2 litros)', NULL, 5.5999999999999996, NULL, '', 5, 4);
+INSERT INTO food (id, description, isactive, name, photoname, value, videoname, nutritionalinfo, categoryid, operationalareaid) VALUES (9, 'Fanta (2 litros)', true, 'Fanta (2 litros)', NULL, 4.5, NULL, '', 5, 4);
+INSERT INTO food (id, description, isactive, name, photoname, value, videoname, nutritionalinfo, categoryid, operationalareaid) VALUES (10, 'Suculento Contra-Filet Acebolado acompanhado de molho madeira', true, 'Contra-Filet Acebolado', NULL, 18.899999999999999, NULL, '', 7, 3);
+INSERT INTO food (id, description, isactive, name, photoname, value, videoname, nutritionalinfo, categoryid, operationalareaid) VALUES (11, 'Retirado da polpa', true, 'Suco de Maracujá', NULL, 4, NULL, '', 9, 4);
+
+
+--
+-- TOC entry 2038 (class 0 OID 57429)
+-- Dependencies: 143 2066 2067
+-- Data for Name: food_accompaniment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO food_accompaniment (foodid, accompanimentid) VALUES (8, 12);
+INSERT INTO food_accompaniment (foodid, accompanimentid) VALUES (8, 13);
+INSERT INTO food_accompaniment (foodid, accompanimentid) VALUES (8, 14);
+INSERT INTO food_accompaniment (foodid, accompanimentid) VALUES (9, 16);
+INSERT INTO food_accompaniment (foodid, accompanimentid) VALUES (9, 15);
+INSERT INTO food_accompaniment (foodid, accompanimentid) VALUES (9, 12);
+INSERT INTO food_accompaniment (foodid, accompanimentid) VALUES (10, 20);
+INSERT INTO food_accompaniment (foodid, accompanimentid) VALUES (10, 19);
+INSERT INTO food_accompaniment (foodid, accompanimentid) VALUES (10, 18);
+INSERT INTO food_accompaniment (foodid, accompanimentid) VALUES (10, 21);
+INSERT INTO food_accompaniment (foodid, accompanimentid) VALUES (11, 12);
+
+
+
+
+--
+-- TOC entry 2041 (class 0 OID 57450)
+-- Dependencies: 146 2059 2066 2040
+-- Data for Name: operationalarea_role; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2050 (class 0 OID 57517)
+-- Dependencies: 155
+-- Data for Name: tabletservicestatus; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2046 (class 0 OID 57467)
+-- Dependencies: 151 2054 2062 2049
+-- Data for Name: ordered; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2047 (class 0 OID 57472)
+-- Dependencies: 152
+-- Data for Name: paymentform; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO paymentform (id, description, name) VALUES (5, 'Cartão Master', 'Cartão Master');
+INSERT INTO paymentform (id, description, name) VALUES (4, 'Cartão Visa', 'Cartão Visa');
+INSERT INTO paymentform (id, description, name) VALUES (6, 'Dinheiro', 'Dinheiro');
+INSERT INTO paymentform (id, description, name) VALUES (7, 'Ticket Refeição', 'Ticket Refeição');
+INSERT INTO paymentform (id, description, name) VALUES (8, 'Vale Refeição', 'Vale Refeição');
+
+
+--
+-- TOC entry 2045 (class 0 OID 57464)
+-- Dependencies: 150 2046 2047
+-- Data for Name: order_paymentform; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2042 (class 0 OID 57453)
+-- Dependencies: 147 2046 2067
+-- Data for Name: orderitem; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2043 (class 0 OID 57458)
+-- Dependencies: 148 2066 2042
+-- Data for Name: orderitem_accompaniment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2061 (class 0 OID 66403)
+-- Dependencies: 186 2064
+-- Data for Name: promotion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO promotion (id, description, isactive, name, photoname, value, videoname, finaldate, inicialdate, categoryid) VALUES (20, 'Promoção exclusiva em comemoração a inauguração de nosso restaurante.', true, 'Promoção de Inauguração', NULL, 21.899999999999999, NULL, '2014-04-28', '2014-04-21', 7);
+
+
+--
+-- TOC entry 2044 (class 0 OID 57461)
+-- Dependencies: 149 2061 2042
+-- Data for Name: orderitem_promotion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2048 (class 0 OID 57488)
+-- Dependencies: 153 2061 2066
+-- Data for Name: promotion_accompaniment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2060 (class 0 OID 65596)
+-- Dependencies: 184
+-- Data for Name: promotion_food; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+INSERT INTO promotion_food (promotionid, foodid) VALUES (20, 11);
+INSERT INTO promotion_food (promotionid, foodid) VALUES (20, 10);
+
+
+--
+-- TOC entry 2058 (class 0 OID 57849)
+-- Dependencies: 178 2039
+-- Data for Name: role_module; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+INSERT INTO role_module (roleid, moduleid) VALUES (200, 1);
+
+
+
+-- Completed on 2014-04-21 18:03:58
+
+--
+-- PostgreSQL database dump complete
+--
+

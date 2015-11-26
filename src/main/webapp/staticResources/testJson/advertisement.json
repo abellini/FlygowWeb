@@ -1,0 +1,19 @@
+[{
+	id:1,
+	name:'Jornal Hoje',
+	initalDate:'01/03/2014',
+	finalDate: '15/03/2014',
+	active: true
+},{
+	id:2,
+	name:'Jornal Nacional',
+	initalDate:'10/03/2014',
+	finalDate: '30/03/2014',
+	active: true
+},{
+	id:3,
+	name:'Jogo do Brasil',
+	initalDate:'12/06/2014',
+	finalDate: '12/07/2014',
+	active: false
+}]

@@ -1,0 +1,77 @@
+.x-icon-register{
+    background-image: url(../images/silk/accept.png) !important;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.x-icon-reset {
+    background-image: url(../images/silk/arrow_rotate_clockwise.png) !important;
+}
+.x-icon-refresh {
+    background-image: url(../images/silk/arrow_refresh.png) !important;
+}
+.x-icon-delete {
+    background-image: url(../images/silk/delete.png) !important;
+}
+.x-icon-coin-tab {
+    background-image: url(../images/silk/coins.png) !important;
+}
+.x-icon-advertisement-tab {
+	background-image: url(../images/silk/newspaper.png) !important;
+}
+.x-icon-category-tab {
+	background-image: url(../images/silk/pictures.png) !important;
+}
+.x-icon-paymentform-tab {
+	background-image: url(../images/silk/creditcards.png) !important;
+}
+.x-icon-operationalarea-tab {
+	background-image: url(../images/silk/arrow_divide.png) !important;
+}
+.x-icon-accompaniment-tab {
+	background-image: url(../images/silk/basket.png) !important;
+}
+.x-icon-food-tab {
+	background-image: url(../images/silk/food.png) !important;
+}
+.x-icon-promotion-tab {
+	background-image: url(../images/silk/promotion.png) !important;
+}
+.x-icon-attendant-tab {
+	background-image: url(../images/silk/user.png) !important;
+}
+.x-icon-role-tab {
+	background-image: url(../images/silk/tag_red.png) !important;
+}
+.x-icon-tablet-tab {
+	background-image: url(../images/silk/tablet.png) !important;
+}
+.x-icon-ready-product {
+	background-image: url(../images/silk/big-accept.png) !important;
+	background-repeat: no-repeat;
+}
+.x-icon-cancel-product {
+	background-image: url(../images/silk/big-cancel.png) !important;
+	background-repeat: no-repeat;
+}
+.x-icon-search {
+	background-image: url(../images/silk/search-trigger.png) !important;
+	width: 17px;
+	border-width: 0 0 1px;
+	border-color: #b5b8c8;
+	border-style: solid;
+}
+.number-table {
+	font-size: 75px;
+	color: #2f7184;
+	font-family: Arial;
+	left: 18%;
+	top: 0px;
+	left: 40px;
+	position: relative;
+}
+.autoRefreshMode{
+	position: relative;
+	left: -26px;
+	font-size: 10px;
+	font-style: italic;
+}

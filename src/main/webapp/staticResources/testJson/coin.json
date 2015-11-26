@@ -1,0 +1,16 @@
+[{
+	id:1,
+	name:'Real',
+	symbol:'R$',
+	conversion: 1
+},{
+	id:2,
+	name:'Dollar',
+	symbol:'$',
+	conversion: 1.75
+},{
+	id:3,
+	name:'Euro',
+	symbol:'E',
+	conversion: 3.05
+}]

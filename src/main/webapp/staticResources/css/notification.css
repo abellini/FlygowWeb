@@ -1,0 +1,12 @@
+.ux-notification-icon-information {
+	background-image: url('../images/silk/notification-info-icon.png');
+}
+
+.ux-notification-icon-error {
+	background-image: url('../images/silk/notification-error-icon.png');
+}
+
+.ux-notification-light .x-window-body {
+	text-align: center;
+	padding: 15px 5px 15px 5px;
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+  <diskStore path="java.io.tmpdir"/>
+    <defaultCache eternal="false" maxElementsInMemory="1000"
+                  overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+                  timeToLiveSeconds="600" memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="MemoryCache" eternal="false"
+           maxElementsInMemory="100" overflowToDisk="false" diskPersistent="false"
+           timeToIdleSeconds="0" timeToLiveSeconds="10"
+           memoryStoreEvictionPolicy="LRU" />
+
+    <!-- configurações modelo para cache de uma classe especifica -->
+    <!--<cache name="pacote.subpacote.modelo.Cidade"-->
+        <!--diskExpiryThreadIntervalSeconds="0"-->
+        <!--diskPersistent="false"-->
+        <!--eternal="true"-->
+        <!--maxElementsInMemory="5500"-->
+        <!--maxElementsOnDisk="0"-->
+        <!--memoryStoreEvictionPolicy="LRU"-->
+        <!--overflowToDisk="true" />-->
+</ehcache>

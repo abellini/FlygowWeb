@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/security 
+        http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<security:global-method-security
+		secured-annotations="enabled" />
+
+	<bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
+		<property name="decisionVoters">
+			<list>
+				<bean class="org.springframework.security.access.vote.RoleVoter">
+					<property name="rolePrefix" value="Auth" />
+				</bean>
+				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+			</list>
+		</property>
+	</bean>
+
+	<security:http access-decision-manager-ref="accessDecisionManager"
+		auto-config="true" access-denied-page="/access-denied">
+
+		<!-- Configuration to 'not needed permissions'... -->
+
+		<security:intercept-url pattern="/access-denied"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
+		<security:intercept-url pattern="/login"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
+		<security:intercept-url pattern="/logout"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
+		<security:intercept-url pattern="/staticResources/**"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+			
+		<security:intercept-url pattern="/error"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
+		<security:intercept-url pattern="/login.action"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
+		<security:intercept-url pattern="/j_spring_security_check"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+			
+		<security:intercept-url pattern="/webservice/**"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />	
+
+
+		<!-- anything into the 'x' folder, must be permission to access... -->
+		<security:intercept-url pattern="/**" access="Authenticated" />
+
+		<security:form-login always-use-default-target="true"
+			login-processing-url="/j_spring_security_check" login-page="/login"
+			default-target-url="/login.action?response=0"
+			authentication-failure-url="/login.action?response=1"
+			authentication-failure-handler-ref="authenticationFailurHandler" />
+
+		<security:logout invalidate-session="true" logout-url="/logout"
+			logout-success-url="/login" />
+
+	</security:http>
+	
+	<!-- ##______________ Connections Types: SERVICE _____________## -->
+	 <security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="myUserDetailsService">
+			<security:password-encoder ref="myPasswordEncoder" />
+		</security:authentication-provider>
+	</security:authentication-manager> 
+
+	<bean id="myUserDetailsService"
+		class="br.com.flygonow.core.security.service.UserDetailsServiceImpl" />
+	<bean id="myPasswordEncoder"
+		class="br.com.flygonow.core.security.CryptPasswordEncoder" />
+
+	<bean id="authenticationFailurHandler"
+		class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
+		<property name="defaultFailureUrl" value="/login.action?response=1" />
+		<property name="exceptionMappings">
+			<props>
+				<!-- Thrown if an authentication request is rejected because the account 
+					is disabled. -->
+				<prop
+					key="org.springframework.security.authentication.DisabledException">
+					/login.action?response=2
+				</prop>
+				<!-- Thrown if an authentication request is rejected because the account 
+					has expired. -->
+				<prop
+					key="org.springframework.security.authentication.AccountExpiredException">
+					/login.action?response=3
+				</prop>
+				<!-- Thrown if an authentication request is rejected because the account's 
+					credentials have expired. -->
+				<prop
+					key="org.springframework.security.authentication.CredentialsExpiredException">
+					/login.action?response=4
+				</prop>
+				<!-- Thrown if an authentication request is rejected because the credentials 
+					are invalid. -->
+				<prop
+					key="org.springframework.security.authentication.BadCredentialsException">
+					/login.action?response=5
+				</prop>
+				<!-- Thrown if an authentication request could not be processed due to 
+					a system problem. -->
+				<prop
+					key="org.springframework.security.authentication.AuthenticationServiceException">
+					/login.action?response=6
+				</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

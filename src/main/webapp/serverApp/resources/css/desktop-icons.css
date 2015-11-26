@@ -1,0 +1,23 @@
+/*----------------------------------------------------
+    Various icon classes
+*/
+
+.registration-icon {
+    background-image: url(../images/grid48x48.png);
+}
+.registration-icon-shortcut {
+    background-image:url(../images/tabs.gif) !important;
+}
+.order-icon {
+    background-image: url(../images/info-icon.png);
+}
+.order-icon-shortcut {
+    background-image:url(../images/info-icon-16.png) !important;
+}
+
+.control-panel-icon {
+    background-image: url(../images/control-panel-icon.png);
+}
+.control-panel-icon-shortcut {
+    background-image:url(../images/control-panel-icon-16.png) !important;
+}

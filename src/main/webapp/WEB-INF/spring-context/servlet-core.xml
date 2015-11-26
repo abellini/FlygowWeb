@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/context  
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- Application Message Bundle -->
+	<bean id="messageSource"
+		  class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages/messages</value>
+				<value>properties/flygow</value>
+			</list>
+		</property>
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+
+	<context:component-scan
+	    base-package="br.com.flygonow"
+	    use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+
+	<!-- Configures the @Controller programming model -->
+	<mvc:annotation-driven />
+
+	<!-- Forwards requests to the "/" resource to the "index" view -->
+	<mvc:view-controller path="/" view-name="index" />  
+
+	<!-- Configures Handler Interceptors -->
+	<mvc:interceptors>
+		<!-- Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		<bean id="webContentInterceptor"
+			  class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+			<property name="cacheSeconds" value="0"/>
+			<property name="useExpiresHeader" value="true"/>
+			<property name="useCacheControlHeader" value="true"/>
+			<property name="useCacheControlNoStore" value="true"/>
+		</bean>
+	</mvc:interceptors>
+
+	<!-- Saves a locale change using a cookie -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="pt_BR" />
+	</bean>
+
+	<!-- Saves a locale change using a cookie -->
+	<!--<bean id="localeResolver"-->
+		  <!--class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />-->
+
+	<!-- Configures static resources of js desktop -->
+	
+	<mvc:resources mapping="/app/**"
+           location="/serverApp/app/"
+           cache-period="10000" />
+           
+    <mvc:resources mapping="/desktop/**"
+           location="/serverApp/desktop/"
+           cache-period="10000" />
+    
+    <mvc:resources mapping="/ext/**"
+           location="/serverApp/ext/"
+           cache-period="10000" />
+           
+    <mvc:resources mapping="/language/**"
+           location="/serverApp/language/"
+           cache-period="10000" />
+           
+    <mvc:resources mapping="/resources/**"
+           location="/serverApp/resources/"
+           cache-period="10000" />
+    
+    <mvc:resources mapping="/theme/**"
+           location="/serverApp/theme/"
+           cache-period="10000" />                                   
+    
+	<!-- Resolves view names to protected .jsp resources within the /WEB-INF/views
+		directory -->
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="mediaTypes">
+			<map>
+				<entry key="html" value="text/html" />
+				<entry key="json" value="application/json" />
+				<entry key="pdf" value="application/pdf" />
+				<entry key="xls" value="application/vnd.ms-excel" />
+				<entry key="xlsx" value="application/vnd.ms-excel" />
+			</map>
+		</property>
+		<property name="viewResolvers">
+			<list>
+				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+				<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="prefix" value="/WEB-INF/views/" />
+					<property name="suffix" value=".jsp" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Upload File -->
+	<bean id="multipartResolver"
+  		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+  		<!-- one of the properties available; the maximum file size in bytes -->
+  		<property name="maxUploadSize" value="100000000" />
+ 	</bean>
+ 	
+</beans>
