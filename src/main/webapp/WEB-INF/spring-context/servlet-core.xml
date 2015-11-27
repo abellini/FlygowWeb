@@ -16,10 +16,18 @@
 		<property name="basenames">
 			<list>
 				<value>messages/messages</value>
-				<value>properties/flygow</value>
 			</list>
 		</property>
 		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+
+	<bean id="externalProperties"
+		  class="br.com.flygonow.config.impl.FlygowConfigExternalPropertiesImpl">
+		<property name="locations">
+			<list>
+				<value>file:/config-flygow-web/flygow.properties</value>
+			</list>
+		</property>
 	</bean>
 
 	<context:component-scan

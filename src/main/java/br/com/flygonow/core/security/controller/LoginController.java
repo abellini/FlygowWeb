@@ -1,5 +1,6 @@
 package br.com.flygonow.core.security.controller;
 
+import br.com.flygonow.config.FlygowConfigExternalProperties;
 import br.com.flygonow.core.security.service.SecurityService;
 import br.com.flygonow.entities.Attendant;
 import org.apache.log4j.Logger;
@@ -23,6 +24,9 @@ public class LoginController implements MessageSourceAware{
 	
 	@Autowired
 	private SecurityService securityService;
+
+	@Autowired
+	private FlygowConfigExternalProperties externalProperties;
 	
 	private MessageSource messageSource;
 
@@ -63,7 +67,7 @@ public class LoginController implements MessageSourceAware{
 			message = "login.validation.sucess";
 			page = "index";
 			model.addAttribute("LoggedUserInfo", userInfo());
-			model.addAttribute("Wallpaper", messageSource.getMessage("wallpaper.image", null, locale));
+			model.addAttribute("Wallpaper", externalProperties.getProperty("wallpaper.image"));
 			return page; 
 		case 1:
 			message = "login.validation.account.invalid";

@@ -1,5 +1,6 @@
 package br.com.flygonow.controller;
 
+import br.com.flygonow.config.FlygowConfigExternalProperties;
 import br.com.flygonow.entities.Accompaniment;
 import br.com.flygonow.entities.Advertisement;
 import br.com.flygonow.entities.Food;
@@ -29,6 +30,9 @@ public class MediaVideoController implements MessageSourceAware{
 	@Autowired
 	private MediaService mediaService;
 
+	@Autowired
+	private FlygowConfigExternalProperties externalProperties;
+
 	@Override
 	public void setMessageSource(MessageSource messageSource) {
 		this.messageSource = messageSource;
@@ -42,7 +46,7 @@ public class MediaVideoController implements MessageSourceAware{
 			Locale locale
 			){
 		try{
-			String rootPath = messageSource.getMessage("url.temp.root.videos", null, locale);
+			String rootPath = externalProperties.getProperty("url.temp.root.videos");
 			mediaService.runPromotionVideo(
 					Promotion.class.getSimpleName(), 
 					rootPath, 
@@ -67,7 +71,7 @@ public class MediaVideoController implements MessageSourceAware{
 			Locale locale
 			){
 		try{
-			String rootPath = messageSource.getMessage("url.temp.root.videos", null, locale);
+			String rootPath = externalProperties.getProperty("url.temp.root.videos");
 			mediaService.runAdvertisementVideo(
 					Advertisement.class.getSimpleName(), 
 					rootPath, 
@@ -92,7 +96,7 @@ public class MediaVideoController implements MessageSourceAware{
 			Locale locale
 			){
 		try{
-			String rootPath = messageSource.getMessage("url.temp.root.videos", null, locale);
+			String rootPath = externalProperties.getProperty("url.temp.root.videos");
 			mediaService.runAccompanimentVideo(
 					Accompaniment.class.getSimpleName(), 
 					rootPath, 
@@ -117,7 +121,7 @@ public class MediaVideoController implements MessageSourceAware{
 			Locale locale
 			){
 		try{
-			String rootPath = messageSource.getMessage("url.temp.root.videos", null, locale);
+			String rootPath = externalProperties.getProperty("url.temp.root.videos");
 			mediaService.runFoodVideo(
 					Food.class.getSimpleName(), 
 					rootPath, 
