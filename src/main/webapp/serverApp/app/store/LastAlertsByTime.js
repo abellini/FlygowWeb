@@ -4,7 +4,7 @@ Ext.define('ExtDesktop.store.LastAlertsByTime', {
         'ExtDesktop.model.LastAlertByTime'
     ],
     constructor: function(cfg) {
-        var me = this, lastDaysSize = 5;
+        var me = this;
         cfg = cfg || {};
         me.callParent([Ext.apply({
             model: 'ExtDesktop.model.LastAlertByTime',
@@ -12,7 +12,7 @@ Ext.define('ExtDesktop.store.LastAlertsByTime', {
             autoLoad: false,
             proxy: {
 				type: 'ajax',
-				url: 'attendant/listLastAlertsByTime/' + lastDaysSize,
+				url: 'attendant/listLastAlertsByTime',
 				method: 'GET',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
 				reader: {

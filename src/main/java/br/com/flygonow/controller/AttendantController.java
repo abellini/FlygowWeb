@@ -1,5 +1,6 @@
 package br.com.flygonow.controller;
 
+import br.com.flygonow.config.FlygowConfigExternalProperties;
 import br.com.flygonow.core.security.CryptUtil;
 import br.com.flygonow.dao.AttendantDao;
 import br.com.flygonow.dao.RoleDao;
@@ -43,6 +44,9 @@ public class AttendantController implements MessageSourceAware{
 	
 	@Autowired
 	private AttendantService attendantService;
+
+	@Autowired
+	private FlygowConfigExternalProperties externalProperties;
 	
 	@Autowired
 	private AttendantDao attendantDAO;
@@ -82,9 +86,10 @@ public class AttendantController implements MessageSourceAware{
 		}
 	}
 
-	@RequestMapping("/listLastAlerts/{size}")
-	public @ResponseBody String listLastAlerts(@PathVariable Integer size, Locale locale){
+	@RequestMapping("/listLastAlerts")
+	public @ResponseBody String listLastAlerts(Locale locale){
 		try{
+			Integer size = Integer.valueOf(externalProperties.getProperty("alerts.numberOfLastAlertsInDay"));
 			List<AttendantAlert> alerts = attendantService.listLastAlerts(size);
 			return JSONView.fromAttendantAlert(alerts);
 		}catch(Exception e){
@@ -94,9 +99,10 @@ public class AttendantController implements MessageSourceAware{
 		}
 	}
 
-	@RequestMapping("/listLastAlertsForChart/{size}")
-	public @ResponseBody String listLastAlertsForChart(@PathVariable Integer size, Locale locale){
+	@RequestMapping("/listLastAlertsForChart")
+	public @ResponseBody String listLastAlertsForChart(Locale locale){
 		try{
+			Integer size = Integer.valueOf(externalProperties.getProperty("alerts.numberOfLastAlertsInDay"));
 			List<AttendantChartLastAlertsModel> attendantChartLastAlertsModels = attendantService.listLastAlertsForChart(size);
 			return JSONView.fromAttendantChartModel(attendantChartLastAlertsModels);
 		}catch(Exception e){
@@ -106,9 +112,10 @@ public class AttendantController implements MessageSourceAware{
 		}
 	}
 
-	@RequestMapping("/listLastAlertsByTime/{size}")
-	public @ResponseBody String listLastAlertsByTime(@PathVariable Integer size, Locale locale){
+	@RequestMapping("/listLastAlertsByTime")
+	public @ResponseBody String listLastAlertsByTime(Locale locale){
 		try{
+			Integer size = Integer.valueOf(externalProperties.getProperty("alerts.numberOfLastAlertsByTime"));
 			List<AttendantChartAlertByTimeModel> attendantChartLastAlertsModels = attendantService.listLastAlertsByTime(size);
 			return JSONView.fromAttendantChartAlertByTimeModel(attendantChartLastAlertsModels);
 		}catch(Exception e){
