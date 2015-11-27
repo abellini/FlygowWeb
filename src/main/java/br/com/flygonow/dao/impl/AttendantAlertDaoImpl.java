@@ -33,7 +33,6 @@ public class AttendantAlertDaoImpl extends GenericDaoImp<AttendantAlert, Long> i
 		return this.listByParams("SELECT al FROM AttendantAlert al LEFT JOIN FETCH al.attendant a WHERE al.status.id = :status ORDER BY al.alertHour DESC", params);
 	}
 
-	//TODO: FILTRAR PELO PARAMETRO PASSADO.
 	@Override
 	public Map<String, Integer> listLastAlertsByTime (Integer size){
 		Map<String, Integer> result = new TreeMap<>();
@@ -41,6 +40,8 @@ public class AttendantAlertDaoImpl extends GenericDaoImp<AttendantAlert, Long> i
 				"SELECT to_char(al.alerthour, 'dd/MM/yyyy') as hr, " +
 						"count(al.alerthour) as val " +
 						"FROM attendantalert al " +
+						"WHERE al.alerthour BETWEEN " +
+						"(now() - INTERVAL '" + size + " days') AND now() " +
 						"GROUP BY hr " +
 						"ORDER BY hr").getResultList();
 		if(resultList != null){
