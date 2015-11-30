@@ -9,6 +9,4 @@ public interface NotifyWebClientsService {
     void sendWebAlertToAttendant(AttendantAlert alert);
 
     void sendWebAlertsToNewOrders();
-
-    void sendWebAlertToAttendantTest();
 }

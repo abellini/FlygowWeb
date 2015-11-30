@@ -9,6 +9,7 @@ import br.com.flygonow.enums.UserTypeEnum;
 import br.com.flygonow.model.AttendantChartAlertByTimeModel;
 import br.com.flygonow.model.AttendantChartLastAlertsModel;
 import br.com.flygonow.service.AttendantService;
+import br.com.flygonow.websocket.service.NotifyWebClientsService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,9 @@ public class AttendantServiceImpl implements AttendantService {
 	
 	@Autowired
 	private AttendantMediaDao attendantMediaDAO;
+
+	@Autowired
+	private NotifyWebClientsService notifyWebClientsService;
 	
 	@Override
 	public void delete(Long id){
@@ -213,6 +217,7 @@ public class AttendantServiceImpl implements AttendantService {
 				)
 		);
 		attendantAlertDao.update(alert);
+		notifyWebClientsService.sendWebAlertToAttendant(null);
 		return listPendentAlerts();
 	}
 

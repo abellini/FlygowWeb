@@ -51,16 +51,4 @@ private static final Logger LOGGER = Logger.getLogger(CallAttendantController.cl
 			return JSONWebserviceView.getJsonSuccess(false, message);
 		}
 	}
-
-	@RequestMapping(value = "/callAttendantTest", method = RequestMethod.GET)
-	public @ResponseBody String callAttendantTest(Locale locale){
-		try{
-			notifyWebClientsService.sendWebAlertToAttendantTest();
-			return JSONWebserviceView.getJsonSuccess(true, "");
-		}catch(Exception e){
-			String message = messageSource.getMessage("error.callattendant", null, locale);
-			LOGGER.error(message, e);
-			return JSONWebserviceView.getJsonSuccess(false, message);
-		}
-	}
 }

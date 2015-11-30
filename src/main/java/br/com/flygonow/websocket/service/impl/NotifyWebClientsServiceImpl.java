@@ -21,10 +21,17 @@ public class NotifyWebClientsServiceImpl implements NotifyWebClientsService {
 
     @Override
     public void sendWebAlertToAttendant(AttendantAlert alert){
-        this.template.convertAndSend(
-                WebsocketClientEndpointsEnum.ATTENDANT_ALERTS.getPath(),
-                JSONWebsocketView.fromAttendantAlert(alert)
-        );
+        if(alert != null){
+            this.template.convertAndSend(
+                    WebsocketClientEndpointsEnum.ATTENDANT_ALERTS.getPath(),
+                    JSONWebsocketView.fromAttendantAlert(alert)
+            );
+        } else {
+            this.template.convertAndSend(
+                    WebsocketClientEndpointsEnum.ATTENDANT_ALERTS.getPath(),
+                    ""
+            );
+        }
     }
 
     @Override
@@ -32,11 +39,5 @@ public class NotifyWebClientsServiceImpl implements NotifyWebClientsService {
         this.template.convertAndSend(
                 WebsocketClientEndpointsEnum.NEW_ORDER.getPath(), ""
         );
-    }
-
-    @Override
-    public void sendWebAlertToAttendantTest(){
-        String text = "Novo alerta para você!";
-        this.template.convertAndSend(WebsocketClientEndpointsEnum.ATTENDANT_ALERTS.getPath(), text);
     }
 }
