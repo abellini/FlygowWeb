@@ -42,6 +42,13 @@ Ext.define('ExtDesktop.controller.ControlPanel.ControlPanelController', {
         console.debug('onControlTabDevicesBtn');
 	},
 	onControlTabAccountsBtn: function(){
-        console.debug('onControlTabAccountsBtn');
+        var me = this;
+        var tabpanel = me.getControlTabPanel();
+        var accountspanel = tabpanel.getComponent('accountspanel');
+        if(!accountspanel){
+            accountspanel = Ext.create('ExtDesktop.view.ControlPanel.Accounts.AccountsPanel');
+            tabpanel.add(accountspanel);
+        }
+        tabpanel.setActiveTab(accountspanel);
 	}
 })

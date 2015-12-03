@@ -1,8 +1,5 @@
 Ext.define('ExtDesktop.view.ControlPanel.ControlPanelPanel', {
     extend: 'Ext.panel.Panel',
-	requires: [
-		''
-    ],
     alias: 'widget.controlpanelpanel',
     initComponent: function() {
         var me = this;
