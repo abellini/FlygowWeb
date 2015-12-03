@@ -43,7 +43,7 @@ public class AttendantAlertDaoImpl extends GenericDaoImp<AttendantAlert, Long> i
 						"WHERE al.alerthour BETWEEN " +
 						"(now() - INTERVAL '" + size + " days') AND now() " +
 						"GROUP BY hr " +
-						"ORDER BY hr").getResultList();
+						"ORDER BY hr DESC").getResultList();
 		if(resultList != null){
 			Iterator iterator = resultList.iterator();
 			while (iterator.hasNext() ) {
