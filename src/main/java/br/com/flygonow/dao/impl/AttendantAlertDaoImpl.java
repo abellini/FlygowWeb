@@ -5,7 +5,6 @@ import br.com.flygonow.entities.AttendantAlert;
 import br.com.flygonow.enums.AlertMessageStatusEnum;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigInteger;
 import java.util.*;
 
 @Repository
@@ -34,7 +33,7 @@ public class AttendantAlertDaoImpl extends GenericDaoImp<AttendantAlert, Long> i
 	}
 
 	@Override
-	public Map<String, Integer> listLastAlertsByTime (Integer size){
+	public List<Object[]> listLastAlertsByTime(Integer size){
 		Map<String, Integer> result = new TreeMap<>();
 		List resultList = this.getEntityManager().createNativeQuery(
 				"SELECT to_char(al.alerthour, 'dd/MM/yyyy') as hr, " +
@@ -43,14 +42,8 @@ public class AttendantAlertDaoImpl extends GenericDaoImp<AttendantAlert, Long> i
 						"WHERE al.alerthour BETWEEN " +
 						"(now() - INTERVAL '" + size + " days') AND now() " +
 						"GROUP BY hr " +
-						"ORDER BY hr DESC").getResultList();
-		if(resultList != null){
-			Iterator iterator = resultList.iterator();
-			while (iterator.hasNext() ) {
-				Object[] tuple = (Object[]) iterator.next();
-				result.put((String)tuple[0], ((BigInteger)tuple[1]).intValue());
-			}
-		}
-		return result;
+						"ORDER BY CAST(to_char(al.alerthour, 'dd/MM/yyyy') as DATE)").getResultList();
+
+		return resultList;
 	}
 }

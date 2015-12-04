@@ -14,5 +14,5 @@ public interface AttendantAlertDao  extends GenericDao<AttendantAlert, Long>{
 
 	List<AttendantAlert> listAlertsForStatus(AlertMessageStatusEnum status);
 
-	Map<String, Integer> listLastAlertsByTime(Integer size);
+	List<Object[]> listLastAlertsByTime(Integer size);
 }
