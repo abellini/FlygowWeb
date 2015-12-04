@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -153,12 +154,12 @@ public class AttendantServiceImpl implements AttendantService {
 	@Override
 	public List<AttendantChartAlertByTimeModel> listLastAlertsByTime(Integer size) {
 		List<AttendantChartAlertByTimeModel> timeModelList = new ArrayList<>();
-		Map<String, Integer> listLastAlertsByTime = attendantAlertDao.listLastAlertsByTime(size);
+		List<Object[]> listLastAlertsByTime = attendantAlertDao.listLastAlertsByTime(size);
 		if(listLastAlertsByTime != null && !listLastAlertsByTime.isEmpty()){
-			for(String time : listLastAlertsByTime.keySet()){
+			for(Object[] row : listLastAlertsByTime){
 				AttendantChartAlertByTimeModel byTimeModel = new AttendantChartAlertByTimeModel();
-				byTimeModel.setTime(time);
-				byTimeModel.setValue(listLastAlertsByTime.get(time));
+				byTimeModel.setTime((String)row[0]);
+				byTimeModel.setValue(((BigInteger)row[1]).intValue());
 
 				timeModelList.add(byTimeModel);
 			}

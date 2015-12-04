@@ -12,7 +12,7 @@ function connectToAttendantAlerts(context) {
 	context.stompClientToAttendantAlerts = stompClientToAttendantAlerts;
 	stompClientToAttendantAlerts.connect({}, function(frame) {
 		stompClientToAttendantAlerts.subscribe('/clients/receiveNewAlert', function(data){
-			myDesktopApp.desktop.taskbar.updateNotificationArea(typeof(data.body) == 'undefined' || data.body == null || data.body == '' ? true : false);
+			myDesktopApp.desktop.taskbar.updateNotificationArea(typeof(data.body) == 'undefined' || data.body == null || data.body == '' ? true : false, true);
 			try{
 				var dataview = Ext.getCmp('alerts');
 				dataview.getStore().load();

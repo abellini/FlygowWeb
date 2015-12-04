@@ -77,9 +77,9 @@ Ext.define('Ext.ux.desktop.TaskBar', {
         me.windowBar.el.on('contextmenu', me.onButtonContextMenu, me);
     },
 
-    updateNotificationArea: function(isFirst){
+    updateNotificationArea: function(isFirst, fromWebSocket){
         var me = this;
-        me.giveMeTheGeneralAlerts(isFirst);
+        me.giveMeTheGeneralAlerts(isFirst, fromWebSocket);
     },
     /**
         Método para definir qual o tipo de chamado do alerta solicitado
@@ -216,20 +216,21 @@ Ext.define('Ext.ux.desktop.TaskBar', {
     /**
         Metodo que carrega a area de alertas de sistema na barra de tarefas
     */
-    giveMeTheGeneralAlerts: function(isFirst){
+    giveMeTheGeneralAlerts: function(isFirst, fromWebSocket){
         var me = this;
         Ext.Ajax.request({
             url: 'attendant/listPendentAlerts',
             success: function(response){
                 var resp = Ext.decode(response.responseText);
-                if(me.alertSize < resp.length){
+                if(fromWebSocket || me.alertSize < resp.length){
                     me.doLayout();
                     if(me.items.length > 5){
                         me.remove(me.items.length-2);
                         me.doLayout();
                     }
-
-                    me.insertNotificationIcon(resp);
+                    if(resp.length > 0){
+                        me.insertNotificationIcon(resp);
+                    }
                     if(!isFirst){
                         //MOSTRA OS BALOES DE NOVAS NOTIFICAÇOES NO CANTO INFERIOR DIREITO DA TELA
                         me.buildNotificationBox(resp[0]);
