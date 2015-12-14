@@ -1,7 +1,8 @@
 Ext.define('ExtDesktop.view.ControlPanel.Accounts.AccountsPanel', {
     extend: 'Ext.panel.Panel',
 	requires: [
-	    'ExtDesktop.view.ControlPanel.Accounts.GridAccounts'
+	    'ExtDesktop.view.ControlPanel.Accounts.GridAccounts',
+	    'ExtDesktop.view.ControlPanel.Accounts.AccountDetailsPanel'
 	],
     alias: 'widget.accountspanel',
 	itemId: 'accountspanel',
@@ -18,6 +19,11 @@ Ext.define('ExtDesktop.view.ControlPanel.Accounts.AccountsPanel', {
             items: [{
                 region: 'center',
                 xtype: 'gridaccounts'
+            },{
+                xtype: 'accountdetailspanel',
+                width: 330,
+                region: 'east',
+                split: true
             }]
         });
         me.callParent(arguments);

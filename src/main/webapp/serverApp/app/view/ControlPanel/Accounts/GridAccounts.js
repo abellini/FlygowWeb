@@ -87,7 +87,7 @@ Ext.define('ExtDesktop.view.ControlPanel.Accounts.GridAccounts', {
                         }
                         return val;
                     },
-                    flex: 1
+                    flex: 1.1
                 },{
                     xtype: 'gridcolumn',
                     dataIndex: 'observations',
@@ -113,41 +113,67 @@ Ext.define('ExtDesktop.view.ControlPanel.Accounts.GridAccounts', {
                     }
                 }
             ],
-            bbar: [
+            tbar: [
+                _('Tablet Number') + ': ',
                 {
                     xtype: 'combobox',
-                    width: 230,
+                    width: 70,
                     enableKeyEvents: true,
                     triggerCls: 'x-icon-search',
-                    onTriggerClick: function(){
-                        try{
-                            var txtSearch = this.getValue();
-                            if(typeof(txtSearch) != 'undefined' && txtSearch != '' && txtSearch != null){
-                                var grid = Ext.ComponentQuery.query('grid[itemId=gridaccounts]')[0];
-
-                                grid.changeAutoLoad(false);
-
-                                var store = Ext.data.StoreManager.lookup('OrderItems');
-                                store.getProxy().setExtraParam('strSearch', txtSearch);
-                                store.load();
-
-                                grid.selModel.deselectAll();
-                            }
-                        }catch(e){
-                            console.error(e);
-                        }
-                    },
-                    listeners: {
-                        specialkey: function(field, e){
-                        // e.HOME, e.END, e.PAGE_UP, e.PAGE_DOWN,
-                        // e.TAB, e.ESC, arrow keys: e.LEFT, e.RIGHT, e.UP, e.DOWN
-                            if (e.getKey() == e.ENTER) {
-                                field.onTriggerClick();
-                            }
-                        }
-                    },
+                    itemId: 'combobox-tabletNumber',
                     allowBlank: true
-                }
+                },
+                '|',
+                _('From') + ': ',
+                {
+                    xtype: 'datefield',
+                    width: 110,
+                    itemId: 'datefield-dateFrom',
+                    maxValue: new Date(),
+                    value: Ext.Date.add(new Date(), Ext.Date.DAY, -1),
+                    format: 'd/m/Y',
+                },
+                 _('To') + ': ',
+                 {
+                     xtype: 'datefield',
+                     width: 110,
+                     itemId: 'datefield-dateTo',
+                     value: new Date(),
+                     maxValue: new Date(),
+                     format: 'd/m/Y',
+                 },
+                 '|',
+                 {
+                     xtype     : 'radiofield',
+                     boxLabel  : _('In Attendance'),
+                     name      : 'orderItemStatus',
+                     inputValue: '1',
+                     checked   : true,
+                     itemId    : 'radio-inAttendance'
+                 }, {
+                     xtype     : 'radiofield',
+                     boxLabel  : _('Accept'),
+                     name      : 'orderItemStatus',
+                     inputValue: '2',
+                     itemId    : 'radio-accept'
+                 }, {
+                     xtype     : 'radiofield',
+                     boxLabel  : _('Cancel'),
+                     name      : 'orderItemStatus',
+                     inputValue: '3',
+                     itemId    : 'radio-cancel'
+                 },
+                 '->',
+                 {
+                    xtype: 'button',
+                    text: _('Clean Filters'),
+                    itemId: 'btnAccountsClearFilters'
+                 },
+                 {
+                    xtype: 'button',
+                    text: _('Search'),
+                    itemId: 'btnAccountsSearch'
+                 }
             ]
         });
 

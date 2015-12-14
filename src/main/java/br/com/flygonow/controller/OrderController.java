@@ -1,6 +1,7 @@
 package br.com.flygonow.controller;
 
 import br.com.flygonow.entities.OrderItem;
+import br.com.flygonow.enums.OrderItemStatusEnum;
 import br.com.flygonow.service.OrderService;
 import br.com.flygonow.util.JSONView;
 import org.apache.log4j.Logger;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,6 +43,33 @@ public class OrderController implements MessageSourceAware{
 		List<OrderItem> orderItems = null;
 		try{
 			orderItems = orderService.listPendentsToday(strSearch);
+			return JSONView.fromOrderItems(orderItems);
+		}catch(Exception e){
+			String message = messageSource.getMessage("error.list.items", null, locale);
+			LOGGER.error(message, e);
+			return JSONView.getJsonSuccess(false, message);
+		}
+	}
+
+	@RequestMapping("/listOrders")
+	public @ResponseBody String listOrders(
+			@RequestParam(required = false) String strSearch,
+			@RequestParam(required = false) String dateIniStr,
+			@RequestParam(required = false) String dateEndStr,
+			@RequestParam(required = false) Long statusId,
+			Locale locale
+	) throws ParseException {
+		List<OrderItem> orderItems = null;
+		Date dateIni = null, dateEnd = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		if(dateIniStr != null){
+			dateIni = sdf.parse(dateIniStr);
+		}
+		if(dateEndStr != null){
+			dateEnd = sdf.parse(dateEndStr);
+		}
+		try{
+			orderItems = orderService.selectByParams(strSearch, dateIni, dateEnd, OrderItemStatusEnum.fromId(statusId));
 			return JSONView.fromOrderItems(orderItems);
 		}catch(Exception e){
 			String message = messageSource.getMessage("error.list.items", null, locale);

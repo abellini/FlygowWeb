@@ -57,7 +57,8 @@ Ext.application({
 		'Registrations.Role.RoleController',
 		'Registrations.Tablet.TabletController',
 		'Order.OrderController',
-		'ControlPanel.ControlPanelController'
+		'ControlPanel.ControlPanelController',
+		'ControlPanel.Accounts.GridAccountsController'
     ],
     name: 'ExtDesktop'
 });

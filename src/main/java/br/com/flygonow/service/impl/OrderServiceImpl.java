@@ -35,21 +35,21 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Override
 	public List<OrderItem> listPendentsToday(String strSearch) {
-		List<OrderItem> orderItems = null;
-		try{
-			List<OperationalArea> listOperationalAreasFromLoggerUser = 
-					operationalAreaService.listOperationalAreasFromLoggerUser();
-			Date today = new Date();
-			orderItems = orderItemDAO.listAllFromDateUserStatus(
-					strSearch,
-					today, 
-					listOperationalAreasFromLoggerUser, 
-					OrderItemStatusEnum.IN_ATTENDANCE
-			);
-		}catch(Exception e){
-			LOGGER.error("LIST PENDENTS TODAY ERROR ->>> " + e.getMessage());
-		}
-		return orderItems;
+		Date today = new Date();
+		return getOrderItems(strSearch, null, today, OrderItemStatusEnum.IN_ATTENDANCE);
+	}
+
+	@Override
+	public List<OrderItem> selectByParams(
+			String strSearch,
+			Date dateIni,
+			Date dateEnd,
+			OrderItemStatusEnum orderItemStatus) {
+		return getOrderItems(
+				strSearch,
+				dateIni,
+				dateEnd != null ? dateEnd : new Date(),
+				orderItemStatus != null ? orderItemStatus : OrderItemStatusEnum.IN_ATTENDANCE);
 	}
 
 	@Override
@@ -81,5 +81,23 @@ public class OrderServiceImpl implements OrderService {
 			order = orderDAO.listByTabletIdAndStatus(tabletId, OrderStatusEnum.ORDER_OPEN.getId()).get(0);
 		}
 		return order;
+	}
+
+	private List<OrderItem> getOrderItems(String strSearch, Date dateIni, Date dateEnd, OrderItemStatusEnum orderItemStatus) {
+		List<OrderItem> orderItems = null;
+		try{
+			List<OperationalArea> listOperationalAreasFromLoggerUser =
+					operationalAreaService.listOperationalAreasFromLoggerUser();
+			orderItems = orderItemDAO.listAllFromDateUserStatus(
+					strSearch,
+					dateIni,
+					dateEnd,
+					listOperationalAreasFromLoggerUser,
+					orderItemStatus
+			);
+		}catch(Exception e){
+			LOGGER.error("LIST PENDENTS TODAY ERROR ->>> " + e.getMessage());
+		}
+		return orderItems;
 	}
 }

@@ -36,23 +36,28 @@ public class OrderItemDaoImp  extends GenericDaoImp<OrderItem, Long> implements 
 	}
 
 	@Override
-	public List<OrderItem> listAllFromDateUserStatus(String strSearch, Date date,
+	public List<OrderItem> listAllFromDateUserStatus(String strSearch, Date dateIni, Date dateEnd,
 			List<OperationalArea> listOperationalAreasFromLoggerUser,
 			OrderItemStatusEnum... orderItemStatus) {
 		List<OrderItem> orderItems = null;
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("date", new java.sql.Date(date.getTime()));
-		Calendar cal = new GregorianCalendar();
-		cal.setTime(date);
-		cal.add(Calendar.DAY_OF_MONTH, -1);
-		params.put("yesterday", new java.sql.Date(cal.getTime().getTime()));
+		params.put("dateEnd", new java.sql.Date(dateEnd.getTime()));
+		if(dateIni == null){
+			Calendar cal = new GregorianCalendar();
+			cal.setTime(dateIni);
+			cal.add(Calendar.DAY_OF_MONTH, -1);
+			params.put("dateIni", new java.sql.Date(cal.getTime().getTime()));
+		} else {
+			params.put("dateIni", new java.sql.Date(dateIni.getTime()));
+		}
+
 		
 		String searchFragment = "";
 		String operationalAreaFragment = "";
 		String orderItemStatusFragment = "";
 		if(strSearch != null && !"".equals(strSearch)){
 			params.put("strSearch", Long.parseLong(strSearch));
-			searchFragment = " AND oi.id = :strSearch";
+			searchFragment = " AND t.number = :strSearch ORDER BY oi.iniOrderDate, oi.iniOrderHour DESC";
 		}
 		List<Long> operationalAreaIds = new ArrayList<Long>();
 		for (OperationalArea operationalArea : listOperationalAreasFromLoggerUser) {
@@ -79,8 +84,8 @@ public class OrderItemDaoImp  extends GenericDaoImp<OrderItem, Long> implements 
 				"JOIN FETCH o.tablet t " + 
 				"LEFT JOIN FETCH oi.accompaniments acc " + 
 				"JOIN FETCH oi.orderItemStatus stt " +
-				"WHERE oi.iniOrderDate BETWEEN :yesterday AND :date " +
-				searchFragment + operationalAreaFragment + orderItemStatusFragment;
+				"WHERE oi.iniOrderDate BETWEEN :dateIni AND :dateEnd " +
+				operationalAreaFragment + orderItemStatusFragment + searchFragment;
 		try{
 			orderItems = this.listByParams(query, params);
 		}catch(Exception e){

@@ -31,7 +31,7 @@ public enum OrderItemStatusEnum {
 		return description;
 	}
 	
-	public OrderItemStatusEnum fromId(Long id){
+	public static OrderItemStatusEnum fromId(Long id){
 		if(OrderItemStatusEnum.IN_ATTENDANCE.getId().equals(id)){
 			return OrderItemStatusEnum.IN_ATTENDANCE;
 		}else if (OrderItemStatusEnum.READY.getId().equals(id)){

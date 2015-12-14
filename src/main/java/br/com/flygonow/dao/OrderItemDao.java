@@ -15,7 +15,7 @@ public interface OrderItemDao  extends GenericDao<OrderItem, Long>{
 
 	List<OrderItem> listByPromotionId(Long id);
 
-	List<OrderItem> listAllFromDateUserStatus(String strSearch, Date date,
+	List<OrderItem> listAllFromDateUserStatus(String strSearch, Date dateIni, Date dateEnd,
 			List<OperationalArea> listOperationalAreasFromLoggerUser,
 			OrderItemStatusEnum... orderItemStatus);
 
