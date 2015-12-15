@@ -37,7 +37,7 @@ public class OrderItemDaoImp  extends GenericDaoImp<OrderItem, Long> implements 
 
 	@Override
 	public List<OrderItem> listAllFromDateUserStatus(String strSearch, Date dateIni, Date dateEnd,
-			List<OperationalArea> listOperationalAreasFromLoggerUser,
+			List<OperationalArea> listOperationalAreasFromLoggedUser,
 			OrderItemStatusEnum... orderItemStatus) {
 		List<OrderItem> orderItems = null;
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -60,7 +60,7 @@ public class OrderItemDaoImp  extends GenericDaoImp<OrderItem, Long> implements 
 			searchFragment = " AND t.number = :strSearch ORDER BY oi.iniOrderDate, oi.iniOrderHour DESC";
 		}
 		List<Long> operationalAreaIds = new ArrayList<Long>();
-		for (OperationalArea operationalArea : listOperationalAreasFromLoggerUser) {
+		for (OperationalArea operationalArea : listOperationalAreasFromLoggedUser) {
 			operationalAreaIds.add(operationalArea.getId());
 		}
 		if(!operationalAreaIds.isEmpty()){
