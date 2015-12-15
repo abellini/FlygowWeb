@@ -121,7 +121,8 @@ Ext.define('ExtDesktop.view.ControlPanel.Accounts.GridAccounts', {
                     enableKeyEvents: true,
                     triggerCls: 'x-icon-search',
                     itemId: 'combobox-tabletNumber',
-                    allowBlank: true
+                    allowBlank: true,
+                    maskRe: /[0-9]/
                 },
                 '|',
                 _('From') + ': ',
@@ -130,6 +131,7 @@ Ext.define('ExtDesktop.view.ControlPanel.Accounts.GridAccounts', {
                     width: 110,
                     itemId: 'datefield-dateFrom',
                     maxValue: new Date(),
+                    editable: false,
                     value: Ext.Date.add(new Date(), Ext.Date.DAY, -1),
                     format: 'd/m/Y',
                 },
@@ -139,6 +141,7 @@ Ext.define('ExtDesktop.view.ControlPanel.Accounts.GridAccounts', {
                      width: 110,
                      itemId: 'datefield-dateTo',
                      value: new Date(),
+                     editable: false,
                      maxValue: new Date(),
                      format: 'd/m/Y',
                  },

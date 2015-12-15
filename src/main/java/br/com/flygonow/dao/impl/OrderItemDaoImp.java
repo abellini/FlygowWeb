@@ -44,7 +44,7 @@ public class OrderItemDaoImp  extends GenericDaoImp<OrderItem, Long> implements 
 		params.put("dateEnd", new java.sql.Date(dateEnd.getTime()));
 		if(dateIni == null){
 			Calendar cal = new GregorianCalendar();
-			cal.setTime(dateIni);
+			cal.setTime(dateEnd);
 			cal.add(Calendar.DAY_OF_MONTH, -1);
 			params.put("dateIni", new java.sql.Date(cal.getTime().getTime()));
 		} else {
@@ -56,7 +56,7 @@ public class OrderItemDaoImp  extends GenericDaoImp<OrderItem, Long> implements 
 		String operationalAreaFragment = "";
 		String orderItemStatusFragment = "";
 		if(strSearch != null && !"".equals(strSearch)){
-			params.put("strSearch", Long.parseLong(strSearch));
+			params.put("strSearch", Short.parseShort(strSearch));
 			searchFragment = " AND t.number = :strSearch ORDER BY oi.iniOrderDate, oi.iniOrderHour DESC";
 		}
 		List<Long> operationalAreaIds = new ArrayList<Long>();

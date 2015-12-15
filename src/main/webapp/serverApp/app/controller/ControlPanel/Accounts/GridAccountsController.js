@@ -93,7 +93,43 @@ Ext.define('ExtDesktop.controller.ControlPanel.Accounts.GridAccountsController',
         me.getRadioAccept().reset();
         me.getRadioCancel().reset();
 	},
+	getOrderState(){
+	    var me = this;
+	    var inAttendanceFieldData = me.getRadioInAttendance().getValue();
+        var acceptFieldData = me.getRadioAccept().getValue();
+        var cancelFieldData = me.getRadioCancel().getValue();
+
+        if(inAttendanceFieldData){
+            return me.getRadioInAttendance().getSubmitValue();
+        } else if (acceptFieldData){
+            return me.getRadioAccept().getSubmitValue();
+        } else if (cancelFieldData){
+            return me.getRadioCancel().getSubmitValue();
+        }
+	},
 	onAccountsSearchBtn: function(){
-	    console.debug('onAccountsSearchBtn');
+	    var me = this;
+
+	    var tabletNumberFieldData = me.getComboboxTabletNumber().getValue() || "";
+	    var dateFromFieldData = me.getDatefieldDateFrom().getSubmitValue();
+	    var dateToFieldData = me.getDatefieldDateTo().getSubmitValue();
+        var orderState = me.getOrderState();
+
+        var grid = me.getGridAccounts();
+
+        try{
+            var store = grid.getStore();
+            store.getProxy().setExtraParam('strSearch', tabletNumberFieldData);
+            store.getProxy().setExtraParam('dateIniStr', dateFromFieldData);
+            store.getProxy().setExtraParam('dateEndStr', dateToFieldData);
+            store.getProxy().setExtraParam('statusId', orderState);
+
+            store.load();
+
+            grid.selModel.deselectAll();
+        }catch(e){
+            console.error(e);
+        }
+
 	}
 })
