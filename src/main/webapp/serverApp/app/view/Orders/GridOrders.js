@@ -136,9 +136,7 @@ Ext.define('ExtDesktop.view.default.GridOrders', {
 						if(typeof(txtSearch) != 'undefined' && txtSearch != '' && txtSearch != null){
 							var grid = Ext.ComponentQuery.query('grid[itemId=gridorders]')[0];
 							
-							grid.disconnectToNewOrders.bind(grid);
-							
-							grid.changeAutoLoad(false);
+							//grid.changeAutoLoad(false);
 							
 							var store = Ext.data.StoreManager.lookup('OrderItems');
 							store.getProxy().setExtraParam('strSearch', txtSearch);
@@ -187,10 +185,9 @@ Ext.define('ExtDesktop.view.default.GridOrders', {
 					
 					var grid = Ext.ComponentQuery.query('grid[itemId=gridorders]')[0];
 					grid.selModel.deselectAll();
-					
-					grid.connectToNewOrders.bind(grid);
 
-					grid.changeAutoLoad(true);
+
+					//grid.changeAutoLoad(true);
 				}
 			}],
 			listeners: {
