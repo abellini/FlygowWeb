@@ -125,11 +125,13 @@ Ext.define('ExtDesktop.view.default.GridOrders', {
 				}
 			],
 			bbar: [
+			_('Tablet Number') + ': ',
 			{
 				xtype: 'combobox',
-				width: 230,
+				width: 70,
 				enableKeyEvents: true,
 				triggerCls: 'x-icon-search',
+				maskRe: /[0-9]/,
 				onTriggerClick: function(){
 					try{
 						var txtSearch = this.getValue(); 
@@ -165,7 +167,7 @@ Ext.define('ExtDesktop.view.default.GridOrders', {
 				},
 				allowBlank: true
 			},
-			'<img src="staticResources/images/silk/shading.png">&nbsp;' + '<b>' + _('In Attendance') + '</b>' + '&nbsp;&nbsp;&nbsp;<img src="staticResources/images/silk/accept.png">&nbsp;' + '<b>' + _('Accept') + '</b>' +'&nbsp;&nbsp;&nbsp;<img src="staticResources/images/silk/cancel.png">&nbsp;' + '<b>' + _('Cancel') + '</b>',
+			'<img src="staticResources/images/silk/shading.png">&nbsp;' + '<b>' + _('In attendance') + '</b>' + '&nbsp;&nbsp;&nbsp;<img src="staticResources/images/silk/accept.png">&nbsp;' + '<b>' + _('Accept') + '</b>' +'&nbsp;&nbsp;&nbsp;<img src="staticResources/images/silk/cancel.png">&nbsp;' + '<b>' + _('Cancel') + '</b>',
 			'->',
 			'<img id="imageAutoLoad" src="' + me.imageLoadOn + '" /><div id="autoRefreshMode" class="autoRefreshMode">&nbsp;' + _('AutoLoad') + '<b>&nbsp;' + me.stringOn + '</b></div>',
 			{

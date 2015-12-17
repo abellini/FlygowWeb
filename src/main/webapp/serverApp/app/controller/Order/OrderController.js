@@ -19,7 +19,9 @@ Ext.define('ExtDesktop.controller.Order.OrderController', {
 		me.control({
 			'grid[itemId=gridorders]' : {
                 afterrender: me.onRenderGrid.bind(me),
-				destroy: me.onDestroyGrid.bind(me)
+				destroy: me.onDestroyGrid.bind(me),
+				select: me.setFormValuesByGrid.bind(me),
+				deselect: me.clearFormValuesByGrid.bind(me)
             },
 			'button[itemId=readyProduct]': {
                 click: me.onReadyBtn.bind(me)
@@ -56,9 +58,7 @@ Ext.define('ExtDesktop.controller.Order.OrderController', {
 		grid.stompClientToNewOrders.disconnect();
     },
 	onRenderGrid: function(){
-		var me = this, grid = me.getGridOrders(), selModel = grid.getSelectionModel();
-		selModel.on('select', me.setFormValuesByGrid.bind(me));
-		selModel.on('deselect', me.clearFormValuesByGrid.bind(me));
+		var me = this, grid = me.getGridOrders();
 		grid.connectToNewOrders = me.connectToNewOrders;
 		grid.disconnectToNewOrders = me.disconnectToNewOrders;
 		me.connectToNewOrders();
@@ -67,8 +67,8 @@ Ext.define('ExtDesktop.controller.Order.OrderController', {
 		var me = this;
 		me.disconnectToNewOrders();
 	},
-	setFormValuesByGrid: function(selModel, eOpts){
-		var me = this, record = selModel.getSelection()[0], 
+	setFormValuesByGrid: function(el, record, index, eOpts){
+		var me = this,
 			form = me.getOrderForm(), formCmp = form.getForm(), formFields = formCmp.getFields().items;
 		for(var i = 0; i < formFields.length; i++){
 			var field = formFields[i], value = record.data[field.name];
@@ -89,7 +89,7 @@ Ext.define('ExtDesktop.controller.Order.OrderController', {
 					}
 				}
 			}else{
-				field.setValue(value);
+				field.setValue(_(value));
 			}
 		}
 		var numberTablet = record.data['tabletNumber'];
@@ -107,7 +107,7 @@ Ext.define('ExtDesktop.controller.Order.OrderController', {
 		var panel = Ext.ComponentQuery.query('panel[itemId=numberTable]')[0];
 		panel.body.update("");
 	},
-	clearFormValuesByGrid: function(selModel, eOpts){
+	clearFormValuesByGrid: function(el, record, index, eOpts){
 		var me = this, form = me.getOrderForm();
 		form.getForm().reset();
 		me.resetPanelTabletNumberValue();

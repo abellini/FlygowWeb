@@ -77,7 +77,7 @@ function _(token){
 		'Number Table':'Número da Mesa',
 		'Product Ready':'Pedido Pronto',
 		'Cancel Order':'Cancelar Pedido',
-		'In Attendance':'Em Atendimento',
+		'In attendance':'Em Atendimento',
 		'Accept':'Pronto',
 		'Cancel':'Cancelado',
 		'AutoLoad':'Auto Carregamento',

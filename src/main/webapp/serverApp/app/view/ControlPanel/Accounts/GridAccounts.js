@@ -90,6 +90,12 @@ Ext.define('ExtDesktop.view.ControlPanel.Accounts.GridAccounts', {
                     flex: 1.1
                 },{
                     xtype: 'gridcolumn',
+                    dataIndex: 'tabletNumber',
+                    text: _('Tablet Number'),
+                    hidden: true,
+                    flex: 1
+                },{
+                    xtype: 'gridcolumn',
                     dataIndex: 'observations',
                     text: _('Observations'),
                     flex: 1.8
@@ -148,7 +154,7 @@ Ext.define('ExtDesktop.view.ControlPanel.Accounts.GridAccounts', {
                  '|',
                  {
                      xtype     : 'radiofield',
-                     boxLabel  : _('In Attendance'),
+                     boxLabel  : _('In attendance'),
                      name      : 'orderItemStatus',
                      inputValue: '1',
                      checked   : true,
