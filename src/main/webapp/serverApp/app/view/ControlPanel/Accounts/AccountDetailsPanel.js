@@ -27,32 +27,102 @@ Ext.define('ExtDesktop.view.ControlPanel.Accounts.AccountDetailsPanel', {
 					name: 'id',
 					readOnly: true
 				},{
+					fieldLabel: _('Tablet Number'),
+					xtype: 'combobox',
+					name: 'tabletNumber',
+					queryMode: 'local',
+					displayField: 'number',
+					valueField: 'id',
+					emptyText: _('Select...'),
+					editable: false,
+					onTriggerClick: function() {
+						this.getStore().load();
+						this.expand();
+					},
+					store: Ext.data.StoreManager.lookup('Tablets'),
+					listeners: {
+						afterrender: function(){
+							this.getStore().load();
+						}
+					},
+					allowBlank: false
+				},{
 					fieldLabel: _('Status'),
-					xtype: 'textfield',
-					name: 'status'
+					xtype: 'combobox',
+					name: 'status',
+					queryMode: 'local',
+					displayField: 'name',
+					valueField: 'id',
+					emptyText: _('Select...'),
+					editable: false,
+					onTriggerClick: function() {
+						this.getStore().load();
+						this.expand();
+					},
+					store: Ext.data.StoreManager.lookup('OrderItemStatus'),
+					listeners: {
+						afterrender: function(){
+							this.getStore().load();
+						}
+					},
+					allowBlank: false
 				},{
 					fieldLabel: _('Item'),
-					xtype: 'textfield',
-					name: 'food'
+					xtype: 'combobox',
+					name: 'food',
+					queryMode: 'local',
+					displayField: 'name',
+					valueField: 'id',
+					emptyText: _('Select...'),
+					editable: false,
+					onTriggerClick: function() {
+						this.getStore().load();
+						this.expand();
+					},
+					store: Ext.data.StoreManager.lookup('Foods'),
+					listeners: {
+						afterrender: function(){
+							this.getStore().load();
+						}
+					},
+					allowBlank: false
 				},{
 					fieldLabel: _('Date'),
 					xtype: 'datefield',
 					format: 'd/m/Y',
 					name: 'iniorderdate',
-					editable: false
+					editable: false,
+					allowBlank: false
 				},{
 					fieldLabel: _('Quantity'),
-					xtype: 'textfield',
-					name: 'quantity'
+					xtype: 'numberfield',
+					name: 'quantity',
+					allowBlank: false
 				},{
 					fieldLabel: _('Item Value'),
-					xtype: 'textfield',
-					name: 'value'
+					xtype: 'numberfield',
+					name: 'value',
+					allowBlank: false
 				},{
 					fieldLabel: _('Accomp'),
-					xtype: 'textfield',
+					xtype: 'combobox',
 					name: 'accompaniments',
-					width: 200
+					queryMode: 'local',
+					displayField: 'name',
+					valueField: 'id',
+					emptyText: _('Select...'),
+					editable: false,
+					multiSelect: true,
+					onTriggerClick: function() {
+						this.getStore().load();
+						this.expand();
+					},
+					store: Ext.data.StoreManager.lookup('Accompaniments'),
+					listeners: {
+						afterrender: function(){
+							this.getStore().load();
+						}
+					}
 				},{
 					fieldLabel: _('Observations'),
 					xtype: 'textarea',

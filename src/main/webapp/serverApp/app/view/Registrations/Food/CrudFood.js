@@ -253,18 +253,7 @@ Ext.define('ExtDesktop.view.Registrations.Food.CrudFood', {
 								this.getStore().load();
 								this.expand();
 							},
-							store: Ext.create('Ext.data.JsonStore',{
-								autoLoad: false,
-								proxy: {
-									type: 'ajax',
-									url: 'accompaniment/listAll',
-									reader: {
-										type: 'json',
-										idProperty: 'id'
-									}
-								},
-								fields: ['id', 'name']
-							}),
+							store: Ext.data.StoreManager.lookup('Accompaniments'),
 							listeners: {
 								afterrender: function(){
 									this.getStore().load();

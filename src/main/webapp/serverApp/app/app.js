@@ -41,7 +41,11 @@ Ext.application({
 		'AlertItems',
 		'LastAlerts',
 		'LastAlertsByTime',
-		'AccountItems'
+		'AccountItems',
+		'OrderItemStatus',
+		'Accompaniments',
+		'Foods',
+		'Tablets'
 	],
     controllers: [
         'Desktop',

@@ -155,18 +155,7 @@ Ext.define('ExtDesktop.view.Registrations.Promotion.CrudPromotion', {
 								this.getStore().load();
 								this.expand();
 							},
-							store: Ext.create('Ext.data.JsonStore',{
-								autoLoad: false,
-								proxy: {
-									type: 'ajax',
-									url: 'food/listAll',
-									reader: {
-										type: 'json',
-										idProperty: 'id'
-									}
-								},
-								fields: ['id', 'name']
-							}),
+							store: Ext.data.StoreManager.lookup('Foods'),
 							listeners: {
 								afterrender: function(){
 									this.getStore().load();

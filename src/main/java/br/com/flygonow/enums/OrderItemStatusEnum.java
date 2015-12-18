@@ -4,7 +4,7 @@ import br.com.flygonow.entities.OrderItemStatus;
 
 
 public enum OrderItemStatusEnum {
-	IN_ATTENDANCE(1L, "In Attendance", "In Attendance"),
+	IN_ATTENDANCE(1L, "In attendance", "In attendance"),
 	READY(2L, "Accept", "Accept"),
 	CANCELED(3L, "Cancel", "Cancel")
 	;

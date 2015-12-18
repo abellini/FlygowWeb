@@ -40,8 +40,10 @@ Ext.define('ExtDesktop.controller.ControlPanel.Accounts.GridAccountsController',
 		    'combobox[itemId=combobox-tabletNumber]': {
 		        specialkey: me.onSpecialkey.bind(me)
 		    },
-			'button[itemId=griAccounts]': {
-                afterrender: me.onAfterRender.bind(me)
+			'grid[itemId=gridaccounts]': {
+                afterrender: me.onAfterRender.bind(me),
+                select: me.loadRecord.bind(me),
+                deselect: me.unloadRecord.bind(me)
             },
 			'button[itemId=btnAccountsClearFilters]': {
                 click: me.onAccountsClearFiltersBtn.bind(me)
@@ -50,6 +52,14 @@ Ext.define('ExtDesktop.controller.ControlPanel.Accounts.GridAccountsController',
                 click: me.onAccountsSearchBtn.bind(me)
             }
 		})
+	},
+	loadRecord: function(el, record, index, eOpts){
+        var form = Ext.ComponentQuery.query('form[itemId=accountdetailspanel]')[0];
+        form.loadRecord(record);
+	},
+	unloadRecord: function(el, record, index, eOpts){
+        var form = Ext.ComponentQuery.query('form[itemId=accountdetailspanel]')[0];
+        form.getForm().reset();
 	},
 	onTriggerClick: function(){
         var me = this;

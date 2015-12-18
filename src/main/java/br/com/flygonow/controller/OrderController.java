@@ -51,6 +51,20 @@ public class OrderController implements MessageSourceAware{
 		}
 	}
 
+
+	@RequestMapping("/listOrderItemStatus")
+	public @ResponseBody String listOrderItemStatus(
+			Locale locale
+	){
+		try{
+			return JSONView.fromOrderItemStatus(OrderItemStatusEnum.values());
+		}catch(Exception e){
+			String message = messageSource.getMessage("error.list.items", null, locale);
+			LOGGER.error(message, e);
+			return JSONView.getJsonSuccess(false, message);
+		}
+	}
+
 	@RequestMapping("/listOrders")
 	public @ResponseBody String listOrders(
 			@RequestParam(required = false) String strSearch,

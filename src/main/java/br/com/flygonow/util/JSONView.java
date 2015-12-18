@@ -1,10 +1,7 @@
 package br.com.flygonow.util;
 
 import br.com.flygonow.entities.*;
-import br.com.flygonow.enums.AlertMessageStatusEnum;
-import br.com.flygonow.enums.AlertMessageTypeEnum;
-import br.com.flygonow.enums.RoleTypeEnum;
-import br.com.flygonow.enums.UserTypeEnum;
+import br.com.flygonow.enums.*;
 import br.com.flygonow.model.AttendantChartAlertByTimeModel;
 import br.com.flygonow.model.AttendantChartLastAlertsModel;
 import net.sf.json.JSONArray;
@@ -396,6 +393,21 @@ public class JSONView {
 				JSONObject obj = new JSONObject();
 				obj.put("time", attendantChartLastAlertsModel.getTime());
 				obj.put("value", attendantChartLastAlertsModel.getValue());
+				arr.add(obj);
+			}
+		}catch(Exception e){
+			System.out.println("Persistent Bag ERROR ->> " + e.getMessage());
+		}
+		return arr.toString();
+	}
+
+	public static String fromOrderItemStatus(OrderItemStatusEnum[] values) {
+		JSONArray arr = new JSONArray();
+		try{
+			for (OrderItemStatusEnum orderItemStatus : values) {
+				JSONObject obj = new JSONObject();
+				obj.put("id", orderItemStatus.getId());
+				obj.put("name", orderItemStatus.getName());
 				arr.add(obj);
 			}
 		}catch(Exception e){
